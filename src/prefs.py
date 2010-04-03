@@ -206,6 +206,11 @@ class PrefsCallbacks(object):
 
     # appearance tab
 
+    def on_allow_bold_toggled(self, chk):
+        """Changes the activity of allow_bold in gconf
+        """
+        self.client.set_bool(KEY('/style/font/allow_bold'), chk.get_active())
+
     def on_use_default_font_toggled(self, chk):
         """Changes the activity of use_default_font in gconf
         """
@@ -491,6 +496,10 @@ class PrefsDialog(SimpleGladeApp):
         # scroll keystroke
         value = self.client.get_bool(KEY('/general/scroll_keystroke'))
         self.get_widget('scroll_keystroke').set_active(value)
+
+        # allow bold
+        value = self.client.get_bool(KEY('/style/font/allow_bold'))
+        self.get_widget('allow_bold').set_active(value)
 
         # default font
         value = self.client.get_bool(KEY('/general/use_default_font'))

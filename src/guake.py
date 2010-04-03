@@ -125,6 +125,7 @@ class GConfHandler(object):
         notify_add(KEY('/general/scroll_output'), self.keystroke_output)
         notify_add(KEY('/general/scroll_keystroke'), self.keystroke_toggled)
 
+        notify_add(KEY('/style/font/allow_bold'), self.allow_bold_toggled)
         notify_add(KEY('/general/use_default_font'), self.default_font_toggled)
         notify_add(KEY('/style/font/style'), self.fstyle_changed)
         notify_add(KEY('/style/font/color'), self.fcolor_changed)
@@ -223,6 +224,13 @@ class GConfHandler(object):
         """
         for i in self.guake.term_list:
             i.set_scroll_on_keystroke(entry.value.get_bool())
+
+    def allow_bold_toggled(self, client, connection_id, entry, data):
+        """If the gconf var allow_bold be changed, this method will
+        be called and will enable/disable the bold text in all terminals
+        """
+        for i in self.guake.term_list:
+            i.set_allow_bold(entry.value.get_bool())
 
     def default_font_toggled(self, client, connection_id, entry, data):
         """If the gconf var use_default_font be changed, this method
@@ -853,6 +861,7 @@ class Guake(SimpleGladeApp):
         self.client.notify(KEY('/style/font/style'))
         self.client.notify(KEY('/style/font/color'))
         self.client.notify(KEY('/style/font/palette'))
+        self.client.notify(KEY('/style/font/allow_bold'))
         self.client.notify(KEY('/style/background/color'))
         self.client.notify(KEY('/style/background/image'))
         self.client.notify(KEY('/style/background/transparency'))

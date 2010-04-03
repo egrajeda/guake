@@ -245,6 +245,18 @@
         </schema>
 
         <schema>
+            <key>/schemas/apps/guake/style/font/allow_bold</key>
+            <applyto>/apps/guake/style/font/allow_bold</applyto>
+            <owner>guake</owner>
+            <type>bool</type>
+            <default>true</default>
+            <locale name="C">
+                <short>Allow bold text.</short>
+                <long>Enable or disable the bold text in the terminal.</long>
+            </locale>
+        </schema>
+
+        <schema>
             <key>/schemas/apps/guake/style/background/color</key>
             <applyto>/apps/guake/style/background/color</applyto>
             <owner>guake</owner>
